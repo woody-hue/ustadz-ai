@@ -14,15 +14,13 @@
   }
 
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
-  body { font-family: 'Tajawal', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; }
+  body { font-family: 'Tajawal', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
   
-  /* Motif Background Islam */
   body::before {
     content: ''; position: fixed; inset: 0; z-index: 0; opacity: 0.03; pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l5 10 10 5-10 5-5 10-5-10-10-5 10-5z' fill='%230d5c3a'/%3E%3C/svg%3E");
   }
 
-  /* Header */
   header {
     position: sticky; top: 0; z-index: 100;
     background: rgba(13, 92, 58, 0.98); backdrop-filter: blur(10px);
@@ -30,56 +28,50 @@
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   }
   .header-inner { max-width: 800px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
-  .logo-icon { font-size: 28px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+  .logo-icon { font-size: 28px; }
   .header-text h1 { font-family: 'Amiri', serif; color: white; font-size: 22px; line-height: 1; }
-  .header-text p { color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 300; }
+  .header-text p { color: rgba(255,255,255,0.7); font-size: 11px; }
 
-  /* Container */
   .container { max-width: 800px; margin: 0 auto; padding: 20px 16px 140px; position: relative; z-index: 1; }
 
-  /* Card Base */
   .card { background: var(--white); border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 8px 30px var(--shadow); padding: 24px; margin-bottom: 20px; }
 
-  /* Setup & Welcome */
   .setup-card h3 { font-family: 'Amiri', serif; color: var(--emerald); margin-bottom: 12px; font-size: 24px; }
-  .api-box { display: flex; gap: 10px; margin-top: 15px; }
-  input[type="password"] { flex: 1; padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border); font-family: inherit; outline: none; transition: 0.3s; }
+  .api-box { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+  input[type="password"] { flex: 1; min-width: 200px; padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border); outline: none; transition: 0.3s; }
   input[type="password"]:focus { border-color: var(--emerald); }
-  .btn-primary { background: linear-gradient(135deg, var(--emerald), var(--emerald-mid)); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; }
+  .btn-primary { background: linear-gradient(135deg, var(--emerald), var(--emerald-mid)); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+  .btn-primary:active { transform: scale(0.98); }
 
-  /* Chat Bubble Styles */
   .chat-wrap { display: flex; flex-direction: column; gap: 18px; }
-  .msg { display: flex; max-width: 85%; animation: fadeIn 0.3s ease; }
+  .msg { display: flex; max-width: 88%; animation: fadeIn 0.3s ease; }
   .msg-user { align-self: flex-end; }
   .msg-ai { align-self: flex-start; gap: 10px; }
   
-  .bubble { padding: 14px 18px; border-radius: 18px; font-size: 15px; position: relative; }
+  .bubble { padding: 14px 18px; border-radius: 18px; font-size: 15px; position: relative; word-wrap: break-word; }
   .msg-user .bubble { background: var(--emerald); color: white; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(13,92,58,0.2); }
-  .msg-ai .bubble { background: white; border: 1px solid var(--border); border-bottom-left-radius: 4px; color: var(--ink-soft); box-shadow: 0 4px 15px var(--shadow); }
+  .msg-ai .bubble { background: white; border: 1px solid var(--border); border-bottom-left-radius: 4px; color: var(--ink-soft); box-shadow: 0 4px 15px var(--shadow); width: 100%; }
 
-  /* Special Sections within AI Response */
-  .section-block { margin: 12px 0; padding: 12px; border-radius: 10px; border-left: 4px solid var(--emerald); }
+  .section-block { margin: 10px 0; padding: 12px; border-radius: 10px; border-left: 4px solid var(--emerald); font-size: 14px; }
   .quran-box { background: rgba(13, 92, 58, 0.05); border-left-color: var(--emerald); }
   .hadits-box { background: rgba(200, 150, 62, 0.07); border-left-color: var(--gold); }
   .mazhab-box { background: #f3f0ff; border-left-color: #7c3aed; }
   .strong-box { background: #eff6ff; border-left-color: #2563eb; font-weight: 500; }
   .advice-box { background: #fffbeb; border-left-color: #d97706; font-style: italic; }
 
-  /* Input Area */
   .input-container { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(250, 246, 240, 0.95); backdrop-filter: blur(15px); padding: 15px; border-top: 1px solid var(--border); z-index: 100; }
-  .input-inner { max-width: 800px; margin: 0 auto; display: flex; gap: 10px; }
-  .input-field { flex: 1; background: white; border: 2px solid var(--border); border-radius: 15px; padding: 10px 15px; max-height: 120px; overflow-y: auto; outline: none; font-family: inherit; font-size: 15px; transition: 0.2s; }
-  .input-field:focus { border-color: var(--emerald); box-shadow: 0 0 0 4px rgba(13,92,58,0.05); }
+  .input-inner { max-width: 800px; margin: 0 auto; display: flex; gap: 10px; align-items: flex-end; }
+  .input-field { flex: 1; background: white; border: 2px solid var(--border); border-radius: 15px; padding: 12px 15px; max-height: 150px; overflow-y: auto; outline: none; font-size: 15px; min-height: 46px; }
   
-  /* Utils */
-  .hidden { display: none; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .arabic { font-family: 'Noto Naskh Arabic', serif; font-size: 1.2em; direction: rtl; display: block; margin-bottom: 5px; color: var(--emerald); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; background: #ccc; }
+  .status-online { background: #4ade80; box-shadow: 0 0 8px #4ade80; }
 
-  @media (max-width: 600px) {
-    .msg { max-width: 92%; }
-    .header-text h1 { font-size: 18px; }
-  }
+  .hidden { display: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .arabic { font-family: 'Noto Naskh Arabic', serif; font-size: 1.3em; direction: rtl; display: block; margin-bottom: 8px; color: var(--emerald); line-height: 1.8; }
+
+  /* Markdown-like simple styles */
+  strong { color: var(--emerald); }
 </style>
 </head>
 <body>
@@ -89,20 +81,20 @@
     <div class="logo-icon">🕌</div>
     <div class="header-text">
       <h1>Ustadz AI</h1>
-      <p>Penyuluh Agama Islam Digital • Powered by Gemini</p>
+      <p><span id="statusDot" class="status-dot"></span> <span id="statusText">Siap Membantu</span></p>
     </div>
+    <button onclick="resetApp()" style="margin-left:auto; background:none; border:none; color:white; font-size:11px; cursor:pointer; opacity:0.7">Ganti Key</button>
   </div>
 </header>
 
 <div class="container">
-  <div id="setupView" class="card setup-card">
-    <h3>Konfigurasi Awal</h3>
-    <p style="font-size: 14px; color: var(--muted);">Gunakan Google Gemini API Key Anda. Data tersimpan secara lokal di browser Anda.</p>
+  <div id="setupView" class="card">
+    <h3 style="font-family:'Amiri'">Konfigurasi API</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom:15px">Gunakan API Key dari Google AI Studio (Gratis). Key tersimpan aman di browser Anda.</p>
     <div class="api-box">
-      <input type="password" id="apiKeyInput" placeholder="Masukkan API Key (AIza...)">
-      <button class="btn-primary" onclick="initApp()">Mulai</button>
+      <input type="password" id="apiKeyInput" placeholder="Masukkan AIzaSy...">
+      <button class="btn-primary" onclick="initApp()">Simpan & Masuk</button>
     </div>
-    <p style="margin-top: 12px; font-size: 12px;">Dapatkan Key di <a href="https://aistudio.google.com/apikey" target="_blank" style="color: var(--emerald); font-weight: bold;">Google AI Studio</a></p>
   </div>
 
   <div id="chatView" class="hidden">
@@ -110,7 +102,7 @@
       <div class="msg msg-ai">
         <div class="bubble">
           <span class="arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</span>
-          Assalamu'alaikum. Saya adalah asisten digital Penyuluh Agama Islam. Ada yang bisa saya bantu terkait hukum fiqih, dalil, atau nasihat keislaman?
+          Assalamu'alaikum Warahmatullahi Wabarakatuh. Saya adalah asisten digital Penyuluh Agama Islam. Bagaimana saya bisa membantu Anda hari ini?
         </div>
       </div>
     </div>
@@ -119,27 +111,24 @@
 
 <div class="input-container hidden" id="inputBar">
   <div class="input-inner">
-    <div class="input-field" id="userInput" contenteditable="true" data-placeholder="Tulis pertanyaan Anda..."></div>
-    <button class="btn-primary" id="sendBtn" onclick="handleSend()" style="border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    <div class="input-field" id="userInput" contenteditable="true" onfocus="this.innerText === 'Tulis pertanyaan Anda...' ? this.innerText = '' : null">Tulis pertanyaan Anda...</div>
+    <button class="btn-primary" id="sendBtn" onclick="handleSend()" style="border-radius: 12px; width: 46px; height: 46px; padding: 0; display: flex; align-items: center; justify-content: center;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     </button>
   </div>
 </div>
 
 <script>
-const SYSTEM_PROMPT = `Anda adalah Ustadz AI, asisten penyuluh agama Islam yang bijaksana. 
-WAJIB:
-1. Awali jawaban dengan Bismillah (teks Arab).
-2. Sertakan dalil Al-Quran (Surah: Ayat) & Terjemahan.
-3. Sertakan Hadits (Riwayat & No).
-4. Untuk Fiqih, jelaskan perbandingan 4 Mazhab secara singkat.
-5. Berikan kesimpulan "Pendapat Terkuat".
-6. Gunakan emoji: 📖 (Quran), 📜 (Hadits), 🏛️ (Mazhab), ✅ (Terkuat), 💡 (Nasihat).`;
+const SYSTEM_PROMPT = `Anda adalah Ustadz AI, asisten penyuluh agama Islam yang ahli dalam Fiqih, Tafsir, dan Akhlak. 
+ATURAN:
+1. Mulai dengan Bismillah (teks Arab).
+2. Jawaban harus ramah, sopan, dan edukatif.
+3. Gunakan format blok untuk: 📖 (Al-Quran), 📜 (Hadits), 🏛️ (Perbandingan 4 Mazhab), ✅ (Kesimpulan Pendapat Terkuat), 💡 (Nasihat).
+4. Gunakan Bahasa Indonesia yang baku namun mudah dimengerti.`;
 
 let chatLog = [];
 let isProcessing = false;
 
-// Initialize
 window.onload = () => {
   const savedKey = localStorage.getItem('ustadz_key');
   if (savedKey) {
@@ -150,55 +139,81 @@ window.onload = () => {
 
 function initApp() {
   const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key.startsWith('AIza')) return alert('Key tidak valid!');
+  if (!key.startsWith('AIza')) return alert('Mohon masukkan API Key yang valid!');
   
   localStorage.setItem('ustadz_key', key);
-  document.getElementById('setupView').classList.add('hidden');
+  document.getElementById('setupView').style.display = 'none';
   document.getElementById('chatView').classList.remove('hidden');
   document.getElementById('inputBar').classList.remove('hidden');
+  document.getElementById('statusDot').classList.add('status-online');
+}
+
+function resetApp() {
+  if(confirm("Hapus API Key dan riwayat?")) {
+    localStorage.removeItem('ustadz_key');
+    location.reload();
+  }
 }
 
 async function handleSend() {
   const inputEl = document.getElementById('userInput');
   const text = inputEl.innerText.trim();
-  if (!text || isProcessing) return;
+  if (!text || text === 'Tulis pertanyaan Anda...' || isProcessing) return;
 
   renderMessage(text, 'user');
   inputEl.innerText = '';
-  isProcessing = true;
+  setProcessing(true);
   
   try {
-    const response = await callGemini(text);
+    const response = await callGeminiWithRetry(text);
     renderMessage(response, 'ai');
   } catch (err) {
-    renderMessage("Maaf, terjadi kendala teknis: " + err.message, 'ai');
+    renderMessage("Gagal mendapatkan jawaban: " + err.message, 'ai');
   } finally {
-    isProcessing = false;
+    setProcessing(false);
   }
 }
 
-async function callGemini(prompt) {
+function setProcessing(val) {
+  isProcessing = val;
+  document.getElementById('statusText').innerText = val ? "Sedang Mengetik..." : "Siap Membantu";
+  document.getElementById('sendBtn').style.opacity = val ? "0.5" : "1";
+}
+
+async function callGeminiWithRetry(prompt) {
   const key = localStorage.getItem('ustadz_key');
-  const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${key}`;
+  // Kami menggunakan v1 (stable) karena jauh lebih jarang terkena error 'not found'
+  const models = ["gemini-1.5-flash", "gemini-1.5-flash-latest"];
   
   chatLog.push({ role: "user", parts: [{ text: prompt }] });
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-      contents: chatLog,
-      generationConfig: { temperature: 0.7, maxOutputTokens: 1500 }
-    })
-  });
+  for (let model of models) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${key}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: chatLog,
+          generationConfig: { temperature: 0.7, maxOutputTokens: 1800 }
+        })
+      });
 
-  const data = await response.json();
-  if (data.error) throw new Error(data.error.message);
-  
-  const aiText = data.candidates[0].content.parts[0].text;
-  chatLog.push({ role: "model", parts: [{ text: aiText }] });
-  return aiText;
+      const data = await response.json();
+      if (response.ok) {
+        const result = data.candidates[0].content.parts[0].text;
+        chatLog.push({ role: "model", parts: [{ text: result }] });
+        if (chatLog.length > 20) chatLog = chatLog.slice(-10); // Jaga agar tidak terlalu berat
+        return result;
+      }
+      
+      if (data.error?.message.includes("not found")) continue;
+      throw new Error(data.error?.message || "API Error");
+    } catch (e) {
+      if (model === models[models.length-1]) throw e;
+    }
+  }
 }
 
 function renderMessage(text, role) {
@@ -206,11 +221,52 @@ function renderMessage(text, role) {
   const wrapper = document.createElement('div');
   wrapper.className = `msg msg-${role}`;
   
-  const htmlContent = role === 'ai' ? formatAIResponse(text) : escapeHTML(text);
+  const content = role === 'ai' ? formatResponse(text) : escapeHTML(text).replace(/\n/g, '<br>');
   
   wrapper.innerHTML = `
-    ${role === 'ai' ? '<div style="font-size:20px">🕌</div>' : ''}
-    <div class="bubble">${htmlContent}</div>
+    ${role === 'ai' ? '<div style="font-size:22px; margin-top:5px">🕌</div>' : ''}
+    <div class="bubble">${content}</div>
   `;
   
-  container.appendChild(wrapper
+  container.appendChild(wrapper);
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function formatResponse(text) {
+  let html = escapeHTML(text)
+    .replace(/\n/g, '<br>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+  const sections = [
+    { icon: '📖', css: 'quran-box' },
+    { icon: '📜', css: 'hadits-box' },
+    { icon: '🏛️', css: 'mazhab-box' },
+    { icon: '✅', css: 'strong-box' },
+    { icon: '💡', css: 'advice-box' }
+  ];
+
+  sections.forEach(s => {
+    // Regex cerdas untuk menangkap blok dari satu emoji ke emoji berikutnya atau akhir teks
+    const regex = new RegExp(`(${s.icon}.*?)(?=<br><br>|${sections.map(x => x.icon).join('|')}|$)`, 's');
+    html = html.replace(regex, `<div class="section-block ${s.css}">$1</div>`);
+  });
+
+  return html;
+}
+
+function escapeHTML(str) {
+  const p = document.createElement('p');
+  p.textContent = str;
+  return p.innerHTML;
+}
+
+// Menangani tombol Enter
+document.getElementById('userInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    handleSend();
+  }
+});
+</script>
+</body>
+</html>
