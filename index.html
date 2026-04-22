@@ -179,7 +179,7 @@ async function handleSend() {
 
 async function callGemini(prompt) {
   const key = localStorage.getItem('ustadz_key');
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+  const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${key}`;
   
   chatLog.push({ role: "user", parts: [{ text: prompt }] });
 
