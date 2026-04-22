@@ -2,553 +2,215 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ustadz AI — Penyuluh Agama Islam</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ustadz AI — Penyuluh Agama Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --emerald:    #0d5c3a;
-    --emerald-mid:#137a4e;
-    --emerald-lt: #1a9e66;
-    --gold:       #c8963e;
-    --gold-lt:    #e8b660;
-    --cream:      #faf6f0;
-    --ink:        #1a1208;
-    --ink-soft:   #3d3020;
-    --muted:      #7a6a50;
-    --border:     #d4c4a0;
-    --white:      #ffffff;
-    --shadow:     rgba(13,92,58,0.12);
-    --danger:     #dc2626;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family: 'Tajawal', sans-serif;
-    background: var(--cream); color: var(--ink);
-    min-height: 100vh; overflow-x: hidden;
-  }
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image:
-      radial-gradient(circle at 15% 15%, rgba(13,92,58,0.07) 0%, transparent 45%),
-      radial-gradient(circle at 85% 85%, rgba(200,150,62,0.07) 0%, transparent 45%),
-      url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230d5c3a' fill-opacity='0.025'%3E%3Cpath d='M40 0l6 12h13l-10 8 4 13-13-9-13 9 4-13-10-8h13z'/%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0;
+    --emerald: #0d5c3a; --emerald-mid: #137a4e; --emerald-lt: #1a9e66;
+    --gold: #c8963e; --gold-lt: #e8b660; --cream: #faf6f0;
+    --ink: #1a1208; --ink-soft: #3d3020; --muted: #7a6a50;
+    --border: #d4c4a0; --white: #ffffff; --shadow: rgba(13,92,58,0.12);
   }
 
-  /* HEADER */
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'Tajawal', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; }
+  
+  /* Motif Background Islam */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; opacity: 0.03; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l5 10 10 5-10 5-5 10-5-10-10-5 10-5z' fill='%230d5c3a'/%3E%3C/svg%3E");
+  }
+
+  /* Header */
   header {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(13,92,58,0.97); backdrop-filter: blur(12px);
-    border-bottom: 2px solid var(--gold); padding: 0 16px;
+    background: rgba(13, 92, 58, 0.98); backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--gold); padding: 12px 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   }
-  .header-inner {
-    max-width: 860px; margin: 0 auto;
-    display: flex; align-items: center; gap: 12px; padding: 12px 0;
-  }
-  .header-icon {
-    width: 44px; height: 44px;
-    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
-    border-radius: 12px; display: flex; align-items: center;
-    justify-content: center; font-size: 22px; flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(200,150,62,0.4);
-  }
-  .header-text h1 { font-family:'Amiri',serif; font-size:20px; color:var(--white); }
-  .header-text p  { font-size:11px; color:rgba(255,255,255,0.6); }
-  .status-pill {
-    margin-left: auto; display: flex; align-items: center;
-    gap: 6px; font-size: 11px; color: rgba(255,255,255,0.75);
-    background: rgba(255,255,255,0.1); border-radius: 20px; padding: 4px 10px;
-  }
-  .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #f59e0b; animation: pulse 2s infinite;
-  }
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+  .header-inner { max-width: 800px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+  .logo-icon { font-size: 28px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+  .header-text h1 { font-family: 'Amiri', serif; color: white; font-size: 22px; line-height: 1; }
+  .header-text p { color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 300; }
 
-  /* MAIN */
-  .main { max-width:860px; margin:0 auto; padding:20px 14px 130px; position:relative; z-index:1; }
+  /* Container */
+  .container { max-width: 800px; margin: 0 auto; padding: 20px 16px 140px; position: relative; z-index: 1; }
 
-  /* SETUP CARD */
-  .setup-card {
-    background: var(--white); border: 2px solid var(--gold);
-    border-radius: 20px; padding: 24px 20px; margin-bottom: 20px;
-    box-shadow: 0 4px 24px var(--shadow); position: relative; overflow: hidden;
-  }
-  .setup-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:4px;
-    background: linear-gradient(90deg, var(--gold), var(--emerald), var(--gold));
-  }
-  .setup-card h3 {
-    font-family:'Amiri',serif; font-size:20px; color:var(--emerald);
-    margin-bottom:8px; display:flex; align-items:center; gap:8px;
-  }
-  .setup-card > p { font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.7; }
-  .steps-box {
-    background: var(--cream); border:1px solid var(--border);
-    border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;
-  }
-  .steps-box strong { font-size:13px; color:var(--ink-soft); display:block; margin-bottom:6px; }
-  .steps-box ol { padding-left:18px; }
-  .steps-box li { font-size:13px; color:var(--muted); line-height:2; }
-  .steps-box a { color:var(--emerald); font-weight:700; text-decoration:none; }
-  .steps-box a:hover { text-decoration:underline; }
-  .api-row { display:flex; gap:8px; }
-  .api-input {
-    flex:1; background:var(--cream); border:1.5px solid var(--border);
-    border-radius:12px; padding:11px 14px;
-    font-family:'Tajawal',sans-serif; font-size:14px; color:var(--ink); outline:none;
-    transition:border-color 0.2s;
-  }
-  .api-input:focus { border-color:var(--emerald-lt); }
-  .api-input::placeholder { color:var(--muted); }
-  .save-btn {
-    background: linear-gradient(135deg, var(--emerald), var(--emerald-mid));
-    color:white; border:none; border-radius:12px; padding:11px 20px;
-    font-family:'Tajawal',sans-serif; font-size:14px; font-weight:600;
-    cursor:pointer; transition:all 0.2s; white-space:nowrap;
-    box-shadow:0 3px 12px rgba(13,92,58,0.3);
-  }
-  .save-btn:hover { transform:translateY(-1px); box-shadow:0 5px 16px rgba(13,92,58,0.4); }
-  .api-note { font-size:11px; color:var(--muted); margin-top:10px; line-height:1.6; }
-  .api-note b { color:var(--emerald); }
-  .change-key-btn {
-    background:transparent; border:1px solid var(--border);
-    color:var(--muted); border-radius:8px; padding:4px 10px;
-    font-size:11px; cursor:pointer; font-family:'Tajawal',sans-serif;
-    transition:all 0.2s;
-  }
-  .change-key-btn:hover { border-color:var(--emerald); color:var(--emerald); }
+  /* Card Base */
+  .card { background: var(--white); border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 8px 30px var(--shadow); padding: 24px; margin-bottom: 20px; }
 
-  /* WELCOME */
-  .welcome-card {
-    background:var(--white); border:1px solid var(--border);
-    border-radius:20px; padding:24px 20px; margin-bottom:18px;
-    text-align:center; box-shadow:0 4px 24px var(--shadow);
-    position:relative; overflow:hidden; display:none;
-  }
-  .welcome-card.show { display:block; animation:fadeIn 0.5s ease; }
-  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  .welcome-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:4px;
-    background:linear-gradient(90deg, var(--emerald), var(--gold), var(--emerald));
-  }
-  .arabic-bismillah {
-    font-family:'Noto Naskh Arabic',serif; font-size:26px;
-    color:var(--emerald); line-height:1.8; margin-bottom:8px; direction:rtl;
-  }
-  .welcome-card h2 { font-family:'Amiri',serif; font-size:16px; color:var(--ink-soft); margin-bottom:6px; }
-  .welcome-card p  { font-size:13px; color:var(--muted); line-height:1.6; }
-  .badges { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin-top:14px; }
-  .badge {
-    background:var(--cream); border:1px solid var(--border);
-    border-radius:20px; padding:4px 11px;
-    font-size:11px; color:var(--emerald); font-weight:500;
-  }
+  /* Setup & Welcome */
+  .setup-card h3 { font-family: 'Amiri', serif; color: var(--emerald); margin-bottom: 12px; font-size: 24px; }
+  .api-box { display: flex; gap: 10px; margin-top: 15px; }
+  input[type="password"] { flex: 1; padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border); font-family: inherit; outline: none; transition: 0.3s; }
+  input[type="password"]:focus { border-color: var(--emerald); }
+  .btn-primary { background: linear-gradient(135deg, var(--emerald), var(--emerald-mid)); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; }
 
-  /* QUICK */
-  .quick-section { margin-bottom:18px; display:none; }
-  .quick-section.show { display:block; }
-  .quick-label { font-size:11px; color:var(--muted); font-weight:600; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
-  .quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
-  .quick-btn {
-    background:var(--white); border:1px solid var(--border); border-radius:12px;
-    padding:10px 13px; font-family:'Tajawal',sans-serif; font-size:13px;
-    color:var(--ink-soft); cursor:pointer; text-align:left;
-    transition:all 0.2s; line-height:1.4;
-  }
-  .quick-btn:hover {
-    border-color:var(--emerald-lt); background:rgba(13,92,58,0.04);
-    color:var(--emerald); transform:translateY(-1px); box-shadow:0 4px 12px var(--shadow);
-  }
+  /* Chat Bubble Styles */
+  .chat-wrap { display: flex; flex-direction: column; gap: 18px; }
+  .msg { display: flex; max-width: 85%; animation: fadeIn 0.3s ease; }
+  .msg-user { align-self: flex-end; }
+  .msg-ai { align-self: flex-start; gap: 10px; }
+  
+  .bubble { padding: 14px 18px; border-radius: 18px; font-size: 15px; position: relative; }
+  .msg-user .bubble { background: var(--emerald); color: white; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(13,92,58,0.2); }
+  .msg-ai .bubble { background: white; border: 1px solid var(--border); border-bottom-left-radius: 4px; color: var(--ink-soft); box-shadow: 0 4px 15px var(--shadow); }
 
-  /* CHAT */
-  .chat-wrap { display:flex; flex-direction:column; gap:14px; }
+  /* Special Sections within AI Response */
+  .section-block { margin: 12px 0; padding: 12px; border-radius: 10px; border-left: 4px solid var(--emerald); }
+  .quran-box { background: rgba(13, 92, 58, 0.05); border-left-color: var(--emerald); }
+  .hadits-box { background: rgba(200, 150, 62, 0.07); border-left-color: var(--gold); }
+  .mazhab-box { background: #f3f0ff; border-left-color: #7c3aed; }
+  .strong-box { background: #eff6ff; border-left-color: #2563eb; font-weight: 500; }
+  .advice-box { background: #fffbeb; border-left-color: #d97706; font-style: italic; }
 
-  .msg-user { display:flex; justify-content:flex-end; animation:slideR 0.25s ease; }
-  @keyframes slideR{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
-  .msg-user .bbl {
-    background:linear-gradient(135deg, var(--emerald), var(--emerald-mid));
-    color:var(--white); border-radius:18px 18px 4px 18px;
-    padding:12px 16px; max-width:78%; font-size:14px; line-height:1.65;
-    box-shadow:0 3px 12px rgba(13,92,58,0.3);
-  }
+  /* Input Area */
+  .input-container { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(250, 246, 240, 0.95); backdrop-filter: blur(15px); padding: 15px; border-top: 1px solid var(--border); z-index: 100; }
+  .input-inner { max-width: 800px; margin: 0 auto; display: flex; gap: 10px; }
+  .input-field { flex: 1; background: white; border: 2px solid var(--border); border-radius: 15px; padding: 10px 15px; max-height: 120px; overflow-y: auto; outline: none; font-family: inherit; font-size: 15px; transition: 0.2s; }
+  .input-field:focus { border-color: var(--emerald); box-shadow: 0 0 0 4px rgba(13,92,58,0.05); }
+  
+  /* Utils */
+  .hidden { display: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .arabic { font-family: 'Noto Naskh Arabic', serif; font-size: 1.2em; direction: rtl; display: block; margin-bottom: 5px; color: var(--emerald); }
 
-  .msg-ai { display:flex; gap:9px; align-items:flex-start; animation:slideL 0.25s ease; }
-  @keyframes slideL{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
-  .ai-av {
-    width:34px; height:34px;
-    background:linear-gradient(135deg, var(--gold), var(--gold-lt));
-    border-radius:10px; display:flex; align-items:center; justify-content:center;
-    font-size:17px; flex-shrink:0; box-shadow:0 2px 8px rgba(200,150,62,0.3);
+  @media (max-width: 600px) {
+    .msg { max-width: 92%; }
+    .header-text h1 { font-size: 18px; }
   }
-  .msg-ai .bbl {
-    background:var(--white); border:1px solid var(--border);
-    border-radius:4px 18px 18px 18px;
-    padding:13px 16px; max-width:84%;
-    font-size:14px; line-height:1.8; color:var(--ink-soft);
-    box-shadow:0 3px 12px var(--shadow);
-  }
-
-  /* Sections inside AI bubble */
-  .s-q { background:rgba(13,92,58,0.06); border-left:3px solid var(--emerald); border-radius:0 8px 8px 0; padding:9px 13px; margin:9px 0; }
-  .s-h { background:rgba(200,150,62,0.08); border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:9px 13px; margin:9px 0; }
-  .s-m { background:rgba(124,58,237,0.06); border-left:3px solid #7c3aed; border-radius:0 8px 8px 0; padding:9px 13px; margin:9px 0; }
-  .s-b { background:linear-gradient(135deg,rgba(13,92,58,0.07),rgba(200,150,62,0.07)); border:1px solid var(--border); border-radius:10px; padding:9px 13px; margin-top:9px; }
-  .s-n { background:rgba(13,92,58,0.04); border-radius:10px; padding:9px 13px; margin-top:9px; font-style:italic; color:var(--emerald); }
-  .msg-ai .bbl strong { color:var(--emerald); font-weight:600; }
-  .msg-ai .bbl em { color:var(--muted); }
-
-  /* Error */
-  .msg-err .bbl {
-    background:#fef2f2; border:1px solid #fecaca;
-    color:var(--danger); border-radius:4px 18px 18px 18px;
-    padding:12px 16px; max-width:84%; font-size:13px; line-height:1.6;
-  }
-
-  /* Typing */
-  .msg-typing { display:flex; gap:9px; align-items:flex-start; }
-  .typing-bbl {
-    background:var(--white); border:1px solid var(--border);
-    border-radius:4px 18px 18px 18px;
-    padding:13px 18px; display:flex; gap:5px; align-items:center;
-    box-shadow:0 3px 12px var(--shadow);
-  }
-  .t-dot { width:7px; height:7px; border-radius:50%; background:var(--emerald-lt); animation:bounce 1.2s infinite; }
-  .t-dot:nth-child(2){animation-delay:.2s} .t-dot:nth-child(3){animation-delay:.4s}
-  @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-
-  /* INPUT */
-  .input-area {
-    position:fixed; bottom:0; left:0; right:0; z-index:100;
-    background:rgba(250,246,240,0.97); backdrop-filter:blur(16px);
-    border-top:1px solid var(--border); padding:12px 14px;
-  }
-  .input-inner { max-width:860px; margin:0 auto; display:flex; gap:9px; align-items:flex-end; }
-  .input-wrap {
-    flex:1; background:var(--white); border:1.5px solid var(--border);
-    border-radius:16px; display:flex; align-items:flex-end; padding:9px 13px;
-    transition:border-color 0.2s, box-shadow 0.2s;
-  }
-  .input-wrap:focus-within { border-color:var(--emerald-lt); box-shadow:0 0 0 3px rgba(13,92,58,0.08); }
-  textarea {
-    flex:1; background:transparent; border:none; outline:none;
-    font-family:'Tajawal',sans-serif; font-size:15px; color:var(--ink);
-    resize:none; min-height:22px; max-height:110px; line-height:1.5;
-  }
-  textarea::placeholder { color:var(--muted); }
-  .send-btn {
-    width:42px; height:42px;
-    background:linear-gradient(135deg, var(--emerald), var(--emerald-mid));
-    border:none; border-radius:12px; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
-    transition:all 0.2s; box-shadow:0 3px 12px rgba(13,92,58,0.3);
-  }
-  .send-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(13,92,58,0.4)}
-  .send-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
-  .send-btn svg{width:19px;height:19px;fill:white}
-  .disclaimer { text-align:center; font-size:10.5px; color:var(--muted); margin-top:5px; }
-
-  @media(max-width:480px){
-    .quick-grid{grid-template-columns:1fr}
-    .msg-user .bbl,.msg-ai .bbl{max-width:90%}
-    .arabic-bismillah{font-size:21px}
-    .api-row{flex-direction:column}
-    .save-btn{width:100%}
-  }
-  ::-webkit-scrollbar{width:4px}
-  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <div class="header-icon">🕌</div>
+    <div class="logo-icon">🕌</div>
     <div class="header-text">
       <h1>Ustadz AI</h1>
-      <p>Penyuluh Agama Islam · Google Gemini (Gratis)</p>
-    </div>
-    <div class="status-pill">
-      <div class="dot" id="dot"></div>
-      <span id="statusTxt">Belum setup</span>
+      <p>Penyuluh Agama Islam Digital • Powered by Gemini</p>
     </div>
   </div>
 </header>
 
-<div class="main">
-
-  <!-- SETUP -->
-  <div class="setup-card" id="setupCard">
-    <h3>🔑 Setup API Key Gemini</h3>
-    <p>Aplikasi ini menggunakan <strong>Google Gemini AI yang GRATIS</strong>. Masukkan API Key sekali saja — tersimpan hanya di perangkat Anda, tidak dikirim ke server manapun.</p>
-
-    <div class="steps-box">
-      <strong>📋 Cara mendapatkan API Key GRATIS (2 menit):</strong>
-      <ol>
-        <li>Buka → <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></li>
-        <li>Login dengan akun Google Anda</li>
-        <li>Tap <strong>"Create API Key"</strong></li>
-        <li>Salin kode yang muncul (dimulai dengan <strong>AIza...</strong>)</li>
-        <li>Tempelkan di kolom di bawah ini</li>
-      </ol>
+<div class="container">
+  <div id="setupView" class="card setup-card">
+    <h3>Konfigurasi Awal</h3>
+    <p style="font-size: 14px; color: var(--muted);">Gunakan Google Gemini API Key Anda. Data tersimpan secara lokal di browser Anda.</p>
+    <div class="api-box">
+      <input type="password" id="apiKeyInput" placeholder="Masukkan API Key (AIza...)">
+      <button class="btn-primary" onclick="initApp()">Mulai</button>
     </div>
-
-    <div class="api-row">
-      <input type="password" class="api-input" id="apiIn"
-        placeholder="Tempel API Key di sini... (AIzaSy...)" />
-      <button class="save-btn" onclick="saveKey()">✅ Simpan & Mulai</button>
-    </div>
-    <p class="api-note">
-      🔒 API Key disimpan di browser Anda (localStorage) — aman & privat.<br>
-      <b>Gratis:</b> 60 request/menit · 1.500 request/hari · Tidak perlu kartu kredit.
-    </p>
+    <p style="margin-top: 12px; font-size: 12px;">Dapatkan Key di <a href="https://aistudio.google.com/apikey" target="_blank" style="color: var(--emerald); font-weight: bold;">Google AI Studio</a></p>
   </div>
 
-  <!-- WELCOME -->
-  <div class="welcome-card" id="welcomeCard">
-    <div class="arabic-bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-    <h2>Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
-    <p>Selamat datang di Ustadz AI. Tanyakan apa saja seputar agama Islam —<br>dijawab lengkap dengan referensi Al-Quran, Hadits, dan pendapat 4 Mazhab.</p>
-    <div class="badges">
-      <span class="badge">📖 Al-Quran Kemenag RI</span>
-      <span class="badge">📜 Kutubussittah</span>
-      <span class="badge">🏛️ 4 Mazhab</span>
-      <span class="badge">✅ Pendapat Terkuat</span>
-    </div>
-    <div style="margin-top:14px">
-      <button class="change-key-btn" onclick="resetKey()">🔑 Ganti API Key</button>
+  <div id="chatView" class="hidden">
+    <div id="chatHistory" class="chat-wrap">
+      <div class="msg msg-ai">
+        <div class="bubble">
+          <span class="arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</span>
+          Assalamu'alaikum. Saya adalah asisten digital Penyuluh Agama Islam. Ada yang bisa saya bantu terkait hukum fiqih, dalil, atau nasihat keislaman?
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- QUICK -->
-  <div class="quick-section" id="quickSec">
-    <div class="quick-label">Pertanyaan Umum</div>
-    <div class="quick-grid">
-      <button class="quick-btn" onclick="sendQ(this.textContent)">🧮 Hitung zakat maal harta 100 juta dengan hutang 10 juta</button>
-      <button class="quick-btn" onclick="sendQ(this.textContent)">🕌 Hukum sholat berjamaah menurut 4 mazhab</button>
-      <button class="quick-btn" onclick="sendQ(this.textContent)">📖 Ayat Al-Quran tentang kesabaran dan tawakal</button>
-      <button class="quick-btn" onclick="sendQ(this.textContent)">🌙 Cara taubat nasuha yang benar dan diterima</button>
-      <button class="quick-btn" onclick="sendQ(this.textContent)">💍 Hukum dan ketentuan mahar dalam pernikahan Islam</button>
-      <button class="quick-btn" onclick="sendQ(this.textContent)">📿 Keutamaan membaca Al-Quran setiap hari</button>
-    </div>
-  </div>
-
-  <!-- CHAT -->
-  <div class="chat-wrap" id="chatWrap"></div>
-
 </div>
 
-<!-- INPUT -->
-<div class="input-area">
+<div class="input-container hidden" id="inputBar">
   <div class="input-inner">
-    <div class="input-wrap">
-      <textarea id="inp" placeholder="Tanyakan seputar agama Islam..." rows="1"
-        onkeydown="onKey(event)" oninput="resize(this)"></textarea>
-    </div>
-    <button class="send-btn" id="sendBtn" onclick="send()">
-      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    <div class="input-field" id="userInput" contenteditable="true" data-placeholder="Tulis pertanyaan Anda..."></div>
+    <button class="btn-primary" id="sendBtn" onclick="handleSend()" style="border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     </button>
   </div>
-  <div class="disclaimer">⚠️ Jawaban AI bukan fatwa resmi. Konsultasikan masalah kompleks kepada ulama setempat.</div>
 </div>
 
 <script>
-const SYSTEM = `Anda adalah Ustadz AI, asisten penyuluh agama Islam yang sangat berpengetahuan, bijaksana, dan ramah.
+const SYSTEM_PROMPT = `Anda adalah Ustadz AI, asisten penyuluh agama Islam yang bijaksana. 
+WAJIB:
+1. Awali jawaban dengan Bismillah (teks Arab).
+2. Sertakan dalil Al-Quran (Surah: Ayat) & Terjemahan.
+3. Sertakan Hadits (Riwayat & No).
+4. Untuk Fiqih, jelaskan perbandingan 4 Mazhab secara singkat.
+5. Berikan kesimpulan "Pendapat Terkuat".
+6. Gunakan emoji: 📖 (Quran), 📜 (Hadits), 🏛️ (Mazhab), ✅ (Terkuat), 💡 (Nasihat).`;
 
-PANDUAN MENJAWAB:
-1. Selalu awali dengan Bismillah untuk pertanyaan agama
-2. Gunakan Bahasa Indonesia yang sopan, jelas, dan mudah dipahami semua kalangan
-3. WAJIB sertakan dalil Al-Quran: nama surah + nomor ayat + terjemahan Kemenag RI
-4. WAJIB sertakan hadits relevan: HR. Nama Kitab No. X + teks singkat
-5. Untuk pertanyaan fiqih: cantumkan pendapat SEMUA 4 mazhab (Hanafi, Maliki, Syafi'i, Hanbali)
-6. Tampilkan PENDAPAT TERKUAT berdasarkan kekuatan dalil dan ijmak ulama
-7. Akhiri dengan nasihat atau motivasi islami
-8. Untuk masalah sangat kompleks: anjurkan konsultasi ulama setempat
+let chatLog = [];
+let isProcessing = false;
 
-FORMAT JAWABAN (gunakan emoji ini persis):
-📖 DALIL AL-QURAN → nama surah, ayat, terjemahan
-📜 DALIL HADITS → HR. Nama Kitab No. X, teks hadits
-🏛️ PENDAPAT 4 MAZHAB → Hanafi / Maliki / Syafi'i / Hanbali masing-masing
-✅ PENDAPAT TERKUAT → kesimpulan dengan alasan kuat
-💡 NASIHAT → motivasi atau pengingat islami
-
-Untuk pertanyaan non-fiqih (doa, sejarah Islam, akhlak, tafsir): jawab hangat dan sertakan dalil relevan tanpa harus mencantumkan semua mazhab.`;
-
-let apiKey = localStorage.getItem('gmk') || '';
-let hist = [];
-let busy = false;
-
-window.onload = () => { if (apiKey) showApp(); };
-
-function saveKey() {
-  const v = document.getElementById('apiIn').value.trim();
-  if (!v.startsWith('AIza')) { alert('API Key tidak valid. Harus dimulai dengan "AIza..."'); return; }
-  apiKey = v;
-  localStorage.setItem('gmk', apiKey);
-  showApp();
-}
-
-function showApp() {
-  document.getElementById('setupCard').style.display = 'none';
-  document.getElementById('welcomeCard').classList.add('show');
-  document.getElementById('quickSec').classList.add('show');
-  setStatus('4ade80', 'Siap');
-}
-
-function resetKey() {
-  apiKey = ''; localStorage.removeItem('gmk');
-  document.getElementById('setupCard').style.display = 'block';
-  document.getElementById('welcomeCard').classList.remove('show');
-  document.getElementById('quickSec').classList.remove('show');
-  setStatus('f59e0b', 'Belum setup');
-}
-
-function setStatus(color, text) {
-  document.getElementById('dot').style.background = '#' + color;
-  document.getElementById('statusTxt').textContent = text;
-}
-
-function resize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 110) + 'px';
-}
-
-function onKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
-}
-
-function sendQ(txt) {
-  document.getElementById('inp').value = txt.replace(/^[^\w\u0600-\u06FF]+/,'').trim();
-  send();
-}
-
-function esc(t) {
-  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-function fmt(text) {
-  let h = esc(text);
-  h = h.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-  h = h.replace(/\*(.*?)\*/g,'<em>$1</em>');
-  h = h.replace(/\n/g,'<br>');
-  // Wrap emoji sections
-  h = h.replace(/(📖\s[^<](?:<br>[^<])*?)(?=<br>(?:📜|🏛️|✅|💡)|$)/g,'<div class="s-q">$1</div>');
-  h = h.replace(/(📜\s[^<](?:<br>[^<])*?)(?=<br>(?:📖|🏛️|✅|💡)|$)/g,'<div class="s-h">$1</div>');
-  h = h.replace(/(🏛️\s[^<](?:<br>[^<])*?)(?=<br>(?:📖|📜|✅|💡)|$)/g,'<div class="s-m">$1</div>');
-  h = h.replace(/(✅\s[^<](?:<br>[^<])*?)(?=<br>(?:📖|📜|🏛️|💡)|$)/g,'<div class="s-b">$1</div>');
-  h = h.replace(/(💡\s[^<](?:<br>[^<])*?)(?=<br>(?:📖|📜|🏛️|✅)|$)/g,'<div class="s-n">$1</div>');
-  return h;
-}
-
-function addUser(txt) {
-  const c = document.getElementById('chatWrap');
-  const d = document.createElement('div');
-  d.className = 'msg-user';
-  d.innerHTML = `<div class="bbl">${esc(txt).replace(/\n/g,'<br>')}</div>`;
-  c.appendChild(d); scrollEnd();
-}
-
-function addAI(txt) {
-  const c = document.getElementById('chatWrap');
-  const d = document.createElement('div');
-  d.className = 'msg-ai';
-  d.innerHTML = `<div class="ai-av">🕌</div><div class="bbl">${fmt(txt)}</div>`;
-  c.appendChild(d); scrollEnd();
-}
-
-function addErr(txt) {
-  const c = document.getElementById('chatWrap');
-  const d = document.createElement('div');
-  d.className = 'msg-ai msg-err';
-  d.innerHTML = `<div class="ai-av">⚠️</div><div class="bbl">${esc(txt)}</div>`;
-  c.appendChild(d); scrollEnd();
-}
-
-function showTyping() {
-  const c = document.getElementById('chatWrap');
-  const d = document.createElement('div');
-  d.id = 'typ'; d.className = 'msg-typing';
-  d.innerHTML = `<div class="ai-av">🕌</div>
-    <div class="typing-bbl">
-      <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
-    </div>`;
-  c.appendChild(d); scrollEnd();
-}
-
-function hideTyping() { const t=document.getElementById('typ'); if(t) t.remove(); }
-function scrollEnd() { setTimeout(()=>window.scrollTo({top:9e9,behavior:'smooth'}),50); }
-
-async function send() {
-  if (busy) return;
-  if (!apiKey) { alert('Masukkan API Key Gemini terlebih dahulu.'); return; }
-
-  const inp = document.getElementById('inp');
-  const txt = inp.value.trim();
-  if (!txt) return;
-
-  // Hide welcome
-  document.getElementById('welcomeCard').classList.remove('show');
-  document.getElementById('quickSec').classList.remove('show');
-
-  inp.value = ''; inp.style.height = 'auto';
-  busy = true;
-  document.getElementById('sendBtn').disabled = true;
-  setStatus('f59e0b', 'Memproses...');
-
-  addUser(txt);
-  hist.push({ role:'user', parts:[{text: txt}] });
-  showTyping();
-
-  try {
-    const body = {
-      system_instruction: { parts:[{ text: SYSTEM }] },
-      contents: hist,
-      generationConfig: { temperature:0.7, maxOutputTokens:2048, topP:0.9 },
-      safetySettings: [
-        {category:'HARM_CATEGORY_HARASSMENT',threshold:'BLOCK_NONE'},
-        {category:'HARM_CATEGORY_HATE_SPEECH',threshold:'BLOCK_NONE'},
-        {category:'HARM_CATEGORY_SEXUALLY_EXPLICIT',threshold:'BLOCK_MEDIUM_AND_ABOVE'},
-        {category:'HARM_CATEGORY_DANGEROUS_CONTENT',threshold:'BLOCK_NONE'}
-      ]
-    };
-
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) }
-    );
-
-    const data = await res.json();
-    hideTyping();
-
-    if (!res.ok) {
-      const msg = data?.error?.message || 'Terjadi kesalahan.';
-      if (msg.includes('API_KEY_INVALID') || msg.includes('API key not valid')) {
-        addErr('❌ API Key tidak valid. Tap "Ganti API Key" di atas untuk memasukkan key yang benar.');
-      } else if (msg.includes('QUOTA') || msg.includes('quota')) {
-        addErr('⚠️ Kuota harian habis. Coba lagi besok atau buat API Key baru di aistudio.google.com/apikey');
-      } else {
-        addErr('❌ Error: ' + msg);
-      }
-      hist.pop();
-    } else {
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Maaf, tidak ada respons.';
-      hist.push({ role:'model', parts:[{text: reply}] });
-      addAI(reply);
-      if (hist.length > 40) hist = hist.slice(-40);
-    }
-
-  } catch(e) {
-    hideTyping();
-    addErr('❌ Gagal terhubung ke server. Periksa koneksi internet Anda.');
-    hist.pop();
+// Initialize
+window.onload = () => {
+  const savedKey = localStorage.getItem('ustadz_key');
+  if (savedKey) {
+    document.getElementById('apiKeyInput').value = savedKey;
+    initApp();
   }
+};
 
-  busy = false;
-  document.getElementById('sendBtn').disabled = false;
-  setStatus('4ade80', 'Siap');
-  inp.focus();
+function initApp() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key.startsWith('AIza')) return alert('Key tidak valid!');
+  
+  localStorage.setItem('ustadz_key', key);
+  document.getElementById('setupView').classList.add('hidden');
+  document.getElementById('chatView').classList.remove('hidden');
+  document.getElementById('inputBar').classList.remove('hidden');
 }
-</script>
-</body>
-</html>
+
+async function handleSend() {
+  const inputEl = document.getElementById('userInput');
+  const text = inputEl.innerText.trim();
+  if (!text || isProcessing) return;
+
+  renderMessage(text, 'user');
+  inputEl.innerText = '';
+  isProcessing = true;
+  
+  try {
+    const response = await callGemini(text);
+    renderMessage(response, 'ai');
+  } catch (err) {
+    renderMessage("Maaf, terjadi kendala teknis: " + err.message, 'ai');
+  } finally {
+    isProcessing = false;
+  }
+}
+
+async function callGemini(prompt) {
+  const key = localStorage.getItem('ustadz_key');
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+  
+  chatLog.push({ role: "user", parts: [{ text: prompt }] });
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents: chatLog,
+      generationConfig: { temperature: 0.7, maxOutputTokens: 1500 }
+    })
+  });
+
+  const data = await response.json();
+  if (data.error) throw new Error(data.error.message);
+  
+  const aiText = data.candidates[0].content.parts[0].text;
+  chatLog.push({ role: "model", parts: [{ text: aiText }] });
+  return aiText;
+}
+
+function renderMessage(text, role) {
+  const container = document.getElementById('chatHistory');
+  const wrapper = document.createElement('div');
+  wrapper.className = `msg msg-${role}`;
+  
+  const htmlContent = role === 'ai' ? formatAIResponse(text) : escapeHTML(text);
+  
+  wrapper.innerHTML = `
+    ${role === 'ai' ? '<div style="font-size:20px">🕌</div>' : ''}
+    <div class="bubble">${htmlContent}</div>
+  `;
+  
+  container.appendChild(wrapper
