@@ -1,21 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ustadz AI — Penyuluh Agama Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald: #0d5c3a; --emerald-mid: #137a4e; --emerald-lt: #1a9e66;
+    --gold: #c8963e; --gold-lt: #e8b660; --cream: #faf6f0;
+    --ink: #1a1208; --ink-soft: #3d3020; --muted: #7a6a50;
+    --border: #d4c4a0; --white: #ffffff; --shadow: rgba(13,92,58,0.12);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'Tajawal', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+  
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; opacity: 0.03; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l5 10 10 5-10 5-5 10-5-10-10-5 10-5z' fill='%230d5c3a'/%3E%3C/svg%3E");
+  }
+
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13, 92, 58, 0.98); backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--gold); padding: 12px 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .header-inner { max-width: 800px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+  .logo-icon { font-size: 28px; }
+  .header-text h1 { font-family: 'Amiri', serif; color: white; font-size: 22px; line-height: 1; }
+  .header-text p { color: rgba(255,255,255,0.7); font-size: 11px; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 20px 16px 140px; position: relative; z-index: 1; }
+  .card { background: var(--white); border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 8px 30px var(--shadow); padding: 24px; margin-bottom: 20px; }
+
+  .api-box { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+  input[type="password"] { flex: 1; min-width: 200px; padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border); outline: none; transition: 0.3s; }
+  input[type="password"]:focus { border-color: var(--emerald); }
+  .btn-primary { background: linear-gradient(135deg, var(--emerald), var(--emerald-mid)); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+  
+  .chat-wrap { display: flex; flex-direction: column; gap: 18px; }
+  .msg { display: flex; max-width: 90%; animation: fadeIn 0.3s ease; }
+  .msg-user { align-self: flex-end; }
+  .msg-ai { align-self: flex-start; gap: 10px; width: 100%; }
+  
+  .bubble { padding: 14px 18px; border-radius: 18px; font-size: 15px; position: relative; word-wrap: break-word; }
+  .msg-user .bubble { background: var(--emerald); color: white; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(13,92,58,0.2); }
+  .msg-ai .bubble { background: white; border: 1px solid var(--border); border-bottom-left-radius: 4px; color: var(--ink-soft); box-shadow: 0 4px 15px var(--shadow); flex: 1; }
+
+  .section-block { margin: 10px 0; padding: 12px; border-radius: 10px; border-left: 4px solid var(--emerald); }
+  .quran-box { background: rgba(13, 92, 58, 0.05); border-left-color: var(--emerald); }
+  .hadits-box { background: rgba(200, 150, 62, 0.07); border-left-color: var(--gold); }
+  .mazhab-box { background: #f3f0ff; border-left-color: #7c3aed; }
+  .strong-box { background: #eff6ff; border-left-color: #2563eb; }
+  .advice-box { background: #fffbeb; border-left-color: #d97706; font-style: italic; }
+
+  .input-container { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(250, 246, 240, 0.95); backdrop-filter: blur(15px); padding: 15px; border-top: 1px solid var(--border); z-index: 100; }
+  .input-inner { max-width: 800px; margin: 0 auto; display: flex; gap: 10px; align-items: flex-end; }
+  .input-field { flex: 1; background: white; border: 2px solid var(--border); border-radius: 15px; padding: 12px 15px; max-height: 150px; overflow-y: auto; outline: none; font-size: 15px; min-height: 46px; }
+
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; background: #ccc; }
+  .status-online { background: #4ade80; box-shadow: 0 0 8px #4ade80; }
+  .hidden { display: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .arabic { font-family: 'Noto Naskh Arabic', serif; font-size: 1.3em; direction: rtl; display: block; margin-bottom: 8px; color: var(--emerald); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-icon">🕌</div>
+    <div class="header-text">
+      <h1>Ustadz AI</h1>
+      <p><span id="statusDot" class="status-dot"></span> <span id="statusText">Siap Membantu</span></p>
+    </div>
+    <button onclick="resetApp()" style="margin-left:auto; background:none; border:none; color:white; font-size:11px; cursor:pointer; opacity:0.6">Ganti Key</button>
+  </div>
+</header>
+
+<div class="container">
+  <div id="setupView" class="card">
+    <h3 style="font-family:'Amiri'">Konfigurasi API</h3>
+    <div class="api-box">
+      <input type="password" id="apiKeyInput" placeholder="Masukkan AIzaSy...">
+      <button class="btn-primary" onclick="initApp()">Mulai</button>
+    </div>
+    <p style="margin-top: 15px; font-size: 12px; color: var(--muted)">Dapatkan Key gratis di <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--emerald)">Google AI Studio</a></p>
+  </div>
+
+  <div id="chatView" class="hidden">
+    <div id="chatHistory" class="chat-wrap">
+      <div class="msg msg-ai">
+        <div class="bubble">
+          <span class="arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</span>
+          Assalamu'alaikum. Saya adalah asisten digital Penyuluh Agama Islam. Ada yang bisa saya bantu?
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="input-container hidden" id="inputBar">
+  <div class="input-inner">
+    <div class="input-field" id="userInput" contenteditable="true" data-placeholder="Tulis pertanyaan..."></div>
+    <button class="btn-primary" id="sendBtn" onclick="handleSend()" style="border-radius: 12px; width: 46px; height: 46px; padding: 0;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" style="margin-top:4px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
 const SYSTEM_PROMPT = `Anda adalah Ustadz AI, asisten penyuluh agama Islam yang bijaksana. 
 WAJIB:
 1. Awali jawaban dengan Bismillah (teks Arab).
 2. Sertakan dalil Al-Quran (Surah: Ayat) & Terjemahan.
 3. Sertakan Hadits (Riwayat & No).
-4. Untuk Fiqih, jelaskan perbandingan 4 Mazhab secara singkat.
+4. Untuk Fiqih, jelaskan perbandingan 4 Mazhab.
 5. Berikan kesimpulan "Pendapat Terkuat".
-6. Gunakan emoji: 📖 (Quran), 📜 (Hadits), 🏛️ (Mazhab), ✅ (Terkuat), 💡 (Nasihat).`;
+6. Gunakan emoji: 📖, 📜, 🏛️, ✅, 💡.`;
 
 let chatLog = [];
 let isProcessing = false;
 
 window.onload = () => {
   const savedKey = localStorage.getItem('ustadz_key');
-  if (savedKey) {
-    document.getElementById('apiKeyInput').value = savedKey;
-    initApp();
-  }
+  if (savedKey) { document.getElementById('apiKeyInput').value = savedKey; initApp(); }
 };
 
 function initApp() {
@@ -28,134 +139,93 @@ function initApp() {
   document.getElementById('statusDot').classList.add('status-online');
 }
 
-function resetApp() {
-  if(confirm("Hapus API Key dan riwayat?")) {
-    localStorage.removeItem('ustadz_key');
-    location.reload();
-  }
-}
+function resetApp() { if(confirm("Hapus data?")) { localStorage.clear(); location.reload(); } }
 
 async function handleSend() {
   const inputEl = document.getElementById('userInput');
   const text = inputEl.innerText.trim();
-  if (!text || text === 'Tulis pertanyaan Anda...' || isProcessing) return;
+  if (!text || isProcessing) return;
 
   renderMessage(text, 'user');
   inputEl.innerText = '';
-  setProcessing(true);
+  isProcessing = true;
+  document.getElementById('statusText').innerText = "Mengetik...";
   
   try {
     const response = await callGemini(text);
     renderMessage(response, 'ai');
   } catch (err) {
-    renderMessage("Gagal: " + err.message, 'ai');
+    renderMessage("Error: " + err.message, 'ai');
   } finally {
-    setProcessing(false);
+    isProcessing = false;
+    document.getElementById('statusText').innerText = "Siap Membantu";
   }
-}
-
-function setProcessing(val) {
-  isProcessing = val;
-  document.getElementById('statusText').innerText = val ? "Sedang Mengetik..." : "Siap Membantu";
-  document.getElementById('sendBtn').style.opacity = val ? "0.5" : "1";
 }
 
 async function callGemini(prompt) {
   const key = localStorage.getItem('ustadz_key');
-  // Daftar model sebagai cadangan
   const models = ["gemini-1.5-flash", "gemini-1.5-flash-latest", "gemini-pro"];
   
-  // Teknik "Prompt Injection": Memasukkan instruksi sistem ke pesan pertama agar kompatibel 100%
   let payloadContents = [];
   if (chatLog.length === 0) {
-    payloadContents.push({
-      role: "user",
-      parts: [{ text: SYSTEM_PROMPT + "\n\nPertanyaan saya: " + prompt }]
-    });
+    payloadContents.push({ role: "user", parts: [{ text: SYSTEM_PROMPT + "\n\nPertanyaan: " + prompt }] });
   } else {
-    // Gabungkan riwayat yang sudah ada + pertanyaan baru
     payloadContents = [...chatLog, { role: "user", parts: [{ text: prompt }] }];
   }
 
-  for (let modelName of models) {
+  for (let model of models) {
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${key}`;
-      
-      const response = await fetch(url, {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+      const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: payloadContents })
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
+      const data = await res.json();
+      if (res.ok) {
         const aiText = data.candidates[0].content.parts[0].text;
-        
-        // Simpan ke log lokal (tanpa instruksi sistem agar tidak boros token)
         chatLog.push({ role: "user", parts: [{ text: prompt }] });
         chatLog.push({ role: "model", parts: [{ text: aiText }] });
-        
-        if (chatLog.length > 20) chatLog = chatLog.slice(-10);
+        if (chatLog.length > 10) chatLog = chatLog.slice(-6);
         return aiText;
       }
-
-      // Jika error model not found, coba model berikutnya
-      if (data.error?.message.toLowerCase().includes("not found")) continue;
-      
+      if (data.error?.message.includes("not found")) continue;
       throw new Error(data.error?.message || "API Error");
-    } catch (e) {
-      if (modelName === models[models.length - 1]) throw e;
-    }
+    } catch (e) { if (model === models[models.length-1]) throw e; }
   }
 }
 
 function renderMessage(text, role) {
   const container = document.getElementById('chatHistory');
-  const wrapper = document.createElement('div');
-  wrapper.className = `msg msg-${role}`;
-  
-  const content = role === 'ai' ? formatResponse(text) : escapeHTML(text).replace(/\n/g, '<br>');
-  
-  wrapper.innerHTML = `
-    ${role === 'ai' ? '<div style="font-size:22px; margin-top:5px">🕌</div>' : ''}
-    <div class="bubble">${content}</div>
-  `;
-  
-  container.appendChild(wrapper);
+  const div = document.createElement('div');
+  div.className = `msg msg-${role}`;
+  const content = role === 'ai' ? formatAI(text) : escapeHTML(text).replace(/\n/g, '<br>');
+  div.innerHTML = `${role==='ai'?'<div style="font-size:22px">🕌</div>':''}<div class="bubble">${content}</div>`;
+  container.appendChild(div);
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
-function formatResponse(text) {
-  let html = escapeHTML(text)
-    .replace(/\n/g, '<br>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
+function formatAI(text) {
+  let h = escapeHTML(text).replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   const sections = [
-    { icon: '📖', css: 'quran-box' },
-    { icon: '📜', css: 'hadits-box' },
-    { icon: '🏛️', css: 'mazhab-box' },
-    { icon: '✅', css: 'strong-box' },
-    { icon: '💡', css: 'advice-box' }
+    { i: '📖', c: 'quran-box' }, { i: '📜', c: 'hadits-box' }, 
+    { i: '🏛️', c: 'mazhab-box' }, { i: '✅', c: 'strong-box' }, { i: '💡', c: 'advice-box' }
   ];
-
   sections.forEach(s => {
-    const regex = new RegExp(`(${s.icon}.*?)(?=<br><br>|${sections.map(x => x.icon).join('|')}|$)`, 's');
-    html = html.replace(regex, `<div class="section-block ${s.css}">$1</div>`);
+    const reg = new RegExp(`(${s.i}.*?)(?=<br><br>|${sections.map(x=>x.i).join('|')}|$)`, 's');
+    h = h.replace(reg, `<div class="section-block ${s.c}">$1</div>`);
   });
-
-  return html;
+  return h;
 }
 
 function escapeHTML(str) {
-  const p = document.createElement('p');
-  p.textContent = str;
-  return p.innerHTML;
+  const p = document.createElement('p'); p.textContent = str; return p.innerHTML;
 }
 
 document.getElementById('userInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    handleSend();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
 });
+</script>
+</body>
+</html>
